@@ -1,0 +1,407 @@
+<head>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Sedan:ital@0;1&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=La+Belle+Aurore&display=swap');
+
+
+        @keyframes scroll-progress-opacity {
+            0% {
+                opacity: 40%;
+            }
+            
+            20% {
+                opacity: 0%;
+            }
+
+            100% {
+                opacity: 0%;
+            }
+        }
+
+        @keyframes scroll-progress-color {
+            0% {
+                stroke:lightgray;
+            }
+            
+            20% {
+                stroke:rgb(55, 55, 55)
+            }
+
+            100% {
+                stroke:rgb(55, 55, 55)
+            }
+        }
+
+        body {
+            margin: 0px;
+        }
+
+        #card-fullvh-wrapper {
+            display: grid;
+            place-items: center;
+            width: 100vw; 
+            height: 100vh;
+        }
+
+        .card-overlay {
+            background-image: radial-gradient(
+                farthest-corner at 70% 10%,
+                white 0%,
+                rgb(111, 111, 111) 80%
+            );
+            /*background-color: rgb(236, 236, 236);*/
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            position: fixed;
+            display: block;
+            z-index: 2;
+            animation: scroll-progress-opacity auto linear;
+            animation-timeline: scroll();
+        }
+
+        .card {
+            transition: all 0.75s cubic-bezier(0.075, 0.82, 0.165, 1);
+            width: 540px;
+            height: 240px;
+            box-shadow: 0 0 10px 1px lightgray;
+            border-radius: 8px;
+            padding: 30px; 
+            border: 1px solid rgb(235, 235, 235);
+            display: flex;
+            justify-content: right; /* horizontal alignment */
+            align-items:flex-end; /* vertical alignment */
+            background-color: rgb(242, 242, 242)
+            /*
+            background-image: radial-gradient(
+                farthest-corner at 450px 30px,
+                white 0%,
+                whitesmoke 100%
+            );
+            /*background:
+                radial-gradient(
+                    circle at 0% 50%, rgba(167, 82, 116, 0) 9px, rgb(249, 249, 249) 10px, 
+                    rgba(96, 16, 48, 0) 11px
+                ) 0px 10px,
+                
+                radial-gradient(
+                        at 100% 100%, rgba(96, 16, 48, 0) 9px, rgb(249, 249, 249) 10px, 
+                        rgba(96, 16, 48, 0) 11px
+                ), 
+                rgb(255, 255, 255);
+            background-size: 20px 20px;*/
+
+        }
+
+        .card:hover {
+            transition: all 0.75s cubic-bezier(0.075, 0.82, 0.165, 1);
+            transform: translateX(-30px) translateY(-30px);
+            box-shadow: 0 0 40px 1px rgb(223, 223, 223);
+            width: 580px;
+            height: 260px;
+            padding: 31px;
+        }
+
+        #card-h1 {
+            text-shadow: 1px -1px 0.5px white, -1px 1px 0.5px black;
+            /*color: rgb(102, 102, 102);*/
+            font-family: Playfair Display;
+            font-weight: 800;
+            margin-top: auto;
+            display: block;
+            color: rgb(242, 242, 242);
+            transition: all 0.75s cubic-bezier(0.075, 0.82, 0.165, 1);
+            font-size: 50pt;
+            margin: 0px;
+            text-align: right;
+        }
+
+        .card:hover > #card-h1 {
+            font-size: 50pt;
+            transition: all 0.75s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+
+        /*.card > h2 {
+            font-size: 20pt;
+            transition: all 0.75s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+
+        .card:hover > h2 {
+            font-size: 21.5pt;
+            transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }*/
+
+        #card-fullvh-wrapper:has(~ #nav-container-sticky.is-stuck) > .card-overlay {
+            opacity: 0%;
+            transition: 0.75s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+        }
+
+        .card-p {
+            text-align: right;
+            margin: 10px 0px 0px  0px;
+        }
+
+
+        .alt {
+            /*transform: translateY(-5px);*/
+            position: relative;
+            top: 8px;
+        }
+
+        /*NAVBAR STYLES*/
+
+        #nav-container-sticky {
+            position: sticky;
+            width: 100%;
+            top: -1px;
+            background-color: white;
+            display: flex;
+            align-items:center;
+            margin-top: -200px;
+            padding-top: 5px;
+        }
+
+        #logo-flex-container {
+            flex:1;
+            justify-items: right;
+        }
+
+        #logo-svg {
+            display: block;
+            margin: auto;
+            width: 80px;
+            height: 82px;
+            display: block;
+            transition: all 0.75s cubic-bezier(0.075, 0.82, 0.165, 1) 0.75s;
+        }
+
+        #nav-container-sticky.is-stuck > * > #logo-svg {
+            width: 40px;
+            height: 55px;
+            transition: all 0.75s cubic-bezier(0.075, 0.82, 0.165, 1) 0.25s;
+            margin: 0px auto 5px;
+        }
+
+
+        #logo-svg > .s0 {
+            transition: all 0.75s cubic-bezier(0.075, 0.82, 0.165, 1);
+            animation: scroll-progress-color auto linear;
+            animation-timeline: scroll();
+        }
+
+        #logo-svg:hover > .s0 {
+            stroke: rgb(111, 120, 108);
+            transition: all 0.75s cubic-bezier(0.075, 0.82, 0.165, 1);
+            cursor:pointer;
+        }
+
+        .nav-flex-container {
+            flex: 0;
+            width: 0px;
+            transition: flex 0.75s ease-in-out;
+        }
+        #nav-container-sticky.is-stuck > .nav-flex-container {
+            flex: 3;
+            transition: flex 1s ease-in-out 0.5s;
+        }
+        a {            
+            text-decoration: underline;
+            text-underline-offset: 5px;
+            text-decoration-thickness: 2px;
+            color: rgb(55, 55, 55);
+            text-decoration-color: rgba(55, 55, 55, 0.2);
+            transition: all 0.75s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+
+        a:hover {
+            color: rgb(86, 103, 80);
+            transition: all 0.75s cubic-bezier(0.075, 0.82, 0.165, 1);
+            text-decoration-color: rgb(55, 55, 55);
+        }
+
+        #nav-container-sticky.is-stuck > * > .nav-link {
+            transition:color 0.75s cubic-bezier(0.075, 0.82, 0.165, 1) 1.25s;
+            text-decoration-color: transparent;
+            color:rgb(55, 55, 55);
+        }
+
+        .nav-link {
+            font-size: 14pt;
+            font-weight:600;
+            font-family: Inter;
+            color: transparent;
+            transition: all 0.75s cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
+            line-height: 0.5em;
+            text-decoration-color: transparent;
+            /*margin-right: 15px;*/
+            border-radius: 20px;
+            border-color: transparent;
+        }
+
+        #nav-container-sticky > * > .nav-link:hover {
+            color: transparent;
+            text-decoration-color: transparent;
+            cursor:default;
+        }
+
+        #nav-container-sticky.is-stuck > * > .nav-link:hover {
+            color: rgb(86, 103, 80);
+            transition: all 0.75s cubic-bezier(0.075, 0.82, 0.165, 1) 0.25s;
+            text-decoration-color: rgb(86, 103, 80);
+            cursor:pointer;
+
+        }
+        
+        #nav-link-home {
+            transform: translateX(100px);
+        }
+
+        #nav-link-get-started-container {
+            text-align: right;
+            margin-right: 40px;
+        }
+        #nav-container-sticky #nav-link-get-started {
+            border: 3px solid transparent;     
+            padding: 10px;
+            margin-left: 20px;
+        }
+
+        #nav-container-sticky.is-stuck #nav-link-get-started {
+            border-color: #e1e1e1;
+            transition: color 0.75s cubic-bezier(0.075, 0.82, 0.165, 1) 1.25s, border-color 0.75s cubic-bezier(0.075, 0.82, 0.165, 1) 1s, background-color 0.25s linear 0.25s;
+            text-decoration:none;
+        }
+        #nav-container-sticky.is-stuck #nav-link-get-started:hover {
+            background-color: #efefef;
+            transition: background-color 0.25s linear 0.25s;
+            color: black;
+        }
+
+        #anim-padding-filler {
+            height: 15px;
+            padding: 0px;
+            margin: 0px;
+        }
+
+        /* LEDE STYLES */
+        #lede {
+            padding: 8px 15% 40% 15%;
+            color:rgb(76, 76, 76);
+
+        }
+
+        #lede-h2 {
+            font-family: Playfair Display;
+            font-size: 50pt;
+            background: radial-gradient(
+                rgb(86, 103, 80) 0%,
+                rgb(55, 55, 55) 100%
+            );
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            /*margin-top: -0.8em;*/
+        }
+
+        .lede-h3 {
+            font-size: 30pt;
+            font-weight: 500;
+            line-height: 1.1em;
+        }
+
+        .lede-p {
+            font-size: 20pt;
+            font-weight:normal;
+            font-family: Inter;
+        }
+
+        .lede-p li {
+            margin-bottom: 1.5em;
+        }
+
+        .lede-p li::marker {
+            font-family: La Belle Aurore;
+            color: rgb(86, 103, 80);
+        }
+        
+    </style>
+</head>
+<body>
+    <div id="card-fullvh-wrapper">
+        <div class="card">
+            <div class="card-layer-1">
+                <p class="card-p"><i> web design for people</i> </p> 
+                <p class="card-p"> logan@graves.studio </p> 
+            <h1 id="card-h1">G<span class="alt">R</span>A<span class="alt">V</span>E<span class="alt">S</span></h1>
+            </div>
+            <!--h2>Web Designer</h2-->
+        </div>
+        <div class="card-overlay"></div>
+    </div>
+
+    <br> <br> <br> <br> <br> 
+
+    <div id="nav-container-sticky">
+        <div id="logo-flex-container">
+            <svg id="logo-svg" xmlns="http://www.w3.org/2000/svg" version="1.2" viewBox="0 0 1511 1517">
+                <title>Logo</title>
+                <style>
+                    .s0 { fill: none;stroke-miterlimit:100;stroke-width: 170 } 
+                </style>
+                <path id="Shape 2" class="s0" d="m582 1437c-276.5 0-500-223.5-500-500 0-276.5 223.5-500 500-500 276.5 0 500 223.5 500 500 0 276.5-223.5 500-500 500z"/>
+                <path id="Shape 4" class="s0" d="m582 87h850v850h-850z"/>
+            </svg>
+        </div>
+        <div class="nav-flex-container" id="nav-link-home-container">
+            <p class="nav-link" style="font-weight:700; ">Graves Studio</p>
+        </div>
+        <div class="nav-flex-container" id="nav-link-get-started-container">
+            <a href="#" class="nav-link" id="nav-link-home">Home</a> 
+
+            <a href="#" class="nav-link" id="nav-link-get-started">Get started →</a>
+        </div>
+    </div>
+
+    <div id="anim-padding-filler"></div>
+
+    <div id="lede">
+        <h2 id="lede-h2">Hi. I'm Logan.</h2>
+        <h3 class="lede-h3">I make <span style="font-family: La Belle Aurore">beautiful, personal sites</span> for people who want a home on the internet.</h3>
+        <p class="lede-p">
+            Personal sites are the digital world's soft underbelly — amidst the churning mass of algorithmic slop there are scattered oases, peopled by personal websites, anon blogs, side projects, side-projects-that-turned-main-projects; it's organic, hand-made in the way much of the surface-level internet isn't.
+            <br><br>
+            My mission is to make that web more accessible — and more beautiful.
+            <br><br>
+        </p>
+        <h3 class="lede-h3">Wait, so... what exactly do you do?</h3>
+        <p class="lede-p"> 
+            I build personal sites: arenas for self expression, digital gardents, mirrors to the people they represent. It's not easy to pin down because everyone's website is different — and that's the beauty of it.<br> <br></p>
+             <p class="lede-p" style="font-family: La Belle Aurore; font-size: 25pt; text-align: center;">Websites are for anyone and everyone.</p> <p class="lede-p">For some it's a page to showcase their work; for others it's a space to write, or to fool around with code; for still others a personal website is just a central node connecting their various identities on the internet.<br><br>I work with clients step-by-step to figure out <i>what they care about</i> and <i>how that comes to life</i> in the aesthetics of a webpage. 
+            <br> <br>
+        </p>
+        <h3 class="lede-h3">What's your process?</h3>
+
+        <ol class="lede-p"> 
+            <li>Fill out <a href="form">the intro form</a>.</li>
+            <li>Get me a sample of the vibe. Compile a sample of things you like — your aesthetics — in a google doc, Pinterest moodboard, markdown file, whatever you prefer. 
+                <br>  <br>This can be images, screenshots of other websites, verbal descriptors e.g. "fancy medieval documents," "looks like a newspaper," "feels like a garden," "retro 1990s/atari," "academic," etc. — and tell me what you want to do with it. Showcase projects? Post essays? Just host an about page with links out to other sites?<br>  <br>If you have layout preferences lmk too — really out there layouts are cool, and so are well-executed traditional ones!</li>
+            <li>I'll come up with a mockup or multiple, depending on how much you gave me to go off of; we can talk through what you think, change directions, refine.</li>
+            <li>Once we're set on a design, we can pick a platform/static site generator that fits your use case and I'll build the site!</li>
+
+    </div>
+
+    <script>
+        const stickyElm = document.querySelector('#nav-container-sticky')
+
+        const observer = new IntersectionObserver( 
+        ([e]) => e.target.classList.toggle('is-stuck', e.intersectionRatio < 1),
+        {threshold: [1]}
+        );
+
+        observer.observe(stickyElm)
+
+    </script>
+</body>
