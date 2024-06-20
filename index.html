@@ -6,7 +6,6 @@
         @import url('https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=La+Belle+Aurore&display=swap');
 
-
         @keyframes scroll-progress-opacity {
             0% {
                 opacity: 40%;
@@ -37,6 +36,7 @@
 
         body {
             margin: 0px;
+            overflow-x:hidden;
         }
 
         #card-fullvh-wrapper {
@@ -44,6 +44,7 @@
             place-items: center;
             width: 100vw; 
             height: 100vh;
+            min-height: -webkit-fill-available;
         }
 
         .card-overlay {
@@ -60,7 +61,9 @@
             display: block;
             z-index: 2;
             animation: scroll-progress-opacity auto linear;
+            -webkit-animation: scroll-progress-opacity auto linear;
             animation-timeline: scroll();
+            -webkit-animation-timeline: scroll();
         }
 
         .card {
@@ -163,6 +166,13 @@
             align-items:center;
             margin-top: -200px;
             padding-top: 5px;
+            padding-left: 40px;
+
+        }
+
+        #nav-container-sticky.is-stuck {
+            transition: 1s linear 0.5s;
+            padding: 5px 40px 5px 0px;
         }
 
         #logo-flex-container {
@@ -190,7 +200,9 @@
         #logo-svg > .s0 {
             transition: all 0.75s cubic-bezier(0.075, 0.82, 0.165, 1);
             animation: scroll-progress-color auto linear;
+            -webkit-animation: scroll-progress-color auto linear;
             animation-timeline: scroll();
+            -webkit-animation-timeline: scroll();
         }
 
         #logo-svg:hover > .s0 {
@@ -260,6 +272,10 @@
             transform: translateX(100px);
         }
 
+        #graves-studio {
+            font-weight: 700;
+        }
+
         #nav-link-get-started-container {
             text-align: right;
             margin-right: 40px;
@@ -326,6 +342,67 @@
             font-family: La Belle Aurore;
             color: rgb(86, 103, 80);
         }
+        @media only screen and (max-width:650px){
+            .card {
+            width: 400px;
+            height: 200px;
+            }
+            .card:hover {
+            width: 440px;
+            height: 220px;
+            }
+
+            #card-h1 {
+                font-size: 30pt;
+            }
+        }
+        
+        @media only screen and (max-width:575px){
+            #nav-link-home {
+                display: none;
+            }
+
+
+            #nav-container-sticky.is-stuck {
+                padding: 5px 20px 5px 10px;
+            }
+        }
+
+        @media only screen and (max-width:475px){
+            .card {
+            width: 300px;
+            height: 150px;
+            }
+            .card:hover {
+            width: 330px;
+            height: 165px;
+            }
+
+            #graves-studio {
+                padding-left: 10px;
+            }
+
+            #nav-container-sticky.is-stuck #nav-link-get-started {
+                margin-left: 0px;
+                transition: color 0.75s cubic-bezier(0.075, 0.82, 0.165, 1) 1.25s, border-color 0.75s cubic-bezier(0.075, 0.82, 0.165, 1) 1.25s, background-color 0.25s linear 0.25s;
+            }
+        }
+
+        @media only screen and (max-width: 395px) {
+            #graves-studio {
+                font-size: 12pt;    
+            }
+            #nav-link-get-started {
+                font-size: 12pt;
+            }
+
+        }
+
+        @media only screen and (max-width: 355px) {
+            #nav-container-sticky {
+                padding-right: 10px;
+            }
+        }
         
     </style>
 </head>
@@ -356,7 +433,7 @@
             </svg>
         </div>
         <div class="nav-flex-container" id="nav-link-home-container">
-            <p class="nav-link" style="font-weight:700; ">Graves Studio</p>
+            <p class="nav-link" id="graves-studio">Graves Studio</p>
         </div>
         <div class="nav-flex-container" id="nav-link-get-started-container">
             <a href="#" class="nav-link" id="nav-link-home">Home</a> 
