@@ -18,16 +18,6 @@
         </div>
         <div class="card-overlay"></div>
     </div>
-    <noscript> 
-        <style type="text/css">
-           #nav-container-sticky {
-               position: absolute;
-               top: auto;
-           } 
-       </style>
-       <p style="text-align:center; padding: 30px;">hey there! this site works fine without javascript; every animation i could implement in pure css i did so.
-        but the site will look a little nicer and work a little better if you turn js on. learn more about my js philosophy here.</p>
-   </noscript>
 
     <br> <br> <br> <br> <br> 
 
@@ -51,6 +41,25 @@
             <a href="#" class="nav-link" id="nav-link-get-started">Get started →</a>
         </div>
     </div>
+
+    <noscript> 
+        <style type="text/css">
+           #nav-container-sticky {
+               position: absolute;
+               top: auto;
+               margin-top: -100px;
+           } 
+           #nojsmsg {
+            font-size: 20pt;
+            font-weight:normal;
+            font-family: Inter;
+            text-align:center; 
+            padding: 0px 60px;
+           }
+       </style>
+       <p id="nojsmsg">hey there! this site works fine without javascript; every animation i could implement in pure css i did so.
+        but the site will look a little nicer and work a little better if you turn js on. learn more about my js philosophy here.</p>
+   </noscript>
 
     <div id="anim-padding-filler"></div>
 
